@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
-import { spawn } from "child_process";
+import { runCmd } from "../../utils/cmd.js";
 import chalk from "chalk";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -24,8 +24,15 @@ async function react(appName: string) {
   const indexHtmlContent = await fs.readFile(indexHtmlPath, "utf-8");
   const newIndexHtmlContent = indexHtmlContent.replace("app-name", appName);
   await fs.writeFile(indexHtmlPath, newIndexHtmlContent);
-  //App.tsx
-  const appTsPath = path.join(appPath, "src", "App.tsx");
+  //home.tsx
+  const appTsPath = path.join(
+    appPath,
+    "src",
+    "features",
+    "home",
+    "pages",
+    "home-page.tsx",
+  );
   const appTsContent = await fs.readFile(appTsPath, "utf-8");
   const newAppTsContent = appTsContent.replace("app-name", appName);
   await fs.writeFile(appTsPath, newAppTsContent);
@@ -43,18 +50,3 @@ async function react(appName: string) {
 }
 
 export default react;
-
-function runCmd(cmd: string, args: string[], cwd: string) {
-  return new Promise((resolve, reject) => {
-    const child = spawn(cmd, args, {
-      cwd,
-      stdio: "inherit",
-      shell: true,
-    });
-
-    child.on("close", (code) => {
-      if (code !== 0) return new Error("Failed to create project");
-      resolve(true);
-    });
-  });
-}

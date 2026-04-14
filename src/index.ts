@@ -2,6 +2,7 @@
 
 import { Command } from "commander";
 import create from "./commands/create/create.js";
+import preview from "./commands/preview/preview.js";
 
 const program = new Command();
 program.name("spark").version("1.0.0");
@@ -11,6 +12,12 @@ program
   .command("create <app-name>")
   .description("create a new app")
   .action(create);
+
+program
+  .command("preview")
+  .description("preview all available sections and components")
+  .action(preview);
+
 /*
 program
   .command("add <type> <name>")
