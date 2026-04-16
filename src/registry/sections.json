@@ -1,0 +1,15 @@
+{
+  "sections": [
+    {
+      "name": "header",
+      "dependencies": [
+        "@emotion/react",
+        "@emotion/styled",
+        "@mui/material",
+        "react-icons"
+      ],
+      "source": "../../../studio/src/sections/header",
+      "target": "src/spark/sections/header"
+    }
+  ]
+}

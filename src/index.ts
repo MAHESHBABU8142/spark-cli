@@ -3,6 +3,7 @@
 import { Command } from "commander";
 import create from "./commands/create/create.js";
 import preview from "./commands/preview/preview.js";
+import add from "./commands/add/add.js";
 
 const program = new Command();
 program.name("spark").version("1.0.0");
@@ -13,17 +14,16 @@ program
   .description("create a new app")
   .action(create);
 
+//for adding a new component/section/page
+program
+  .command("add <name>")
+  .description("add a new component/section/page")
+  .action(add);
+
+//for previewing
 program
   .command("preview")
   .description("preview all available sections and components")
   .action(preview);
-
-/*
-program
-  .command("add <type> <name>")
-  .description("add a new component/section/page")
-  .action((type, name) => {
-    console.log(`you added a ${type} called ${name}`);
-  });*/
 
 program.parseAsync();
